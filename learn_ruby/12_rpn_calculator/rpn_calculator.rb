@@ -1,13 +1,39 @@
 class RPNCalculator
-  def push(val); end
+  def initialize
+    @stack = []
+  end
 
-  def times; end
+  def push(val)
+    @stack.push(val)
+  end
 
-  def plus; end
+  def times
+    push(:*)
+  end
 
-  def minus; end
+  def plus
+    push(:+)
+  end
 
-  def divide; end
+  def minus
+    push(:-)
+  end
 
-  def value; end
+  def divide
+    push(:/)
+  end
+
+  def value
+    operation = @stack.pop
+    second = @stack.pop
+    first = @stack.pop
+
+    first.send(operation, second).tap do |answer|
+      @stack.push(answer)
+    end
+  end
+
+  private
+
+  attr_accessor :stack
 end
