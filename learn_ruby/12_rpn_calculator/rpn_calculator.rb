@@ -10,29 +10,43 @@ class RPNCalculator
 
   def times
     push(:*)
-    evaluate
+    evaluate_next
   end
 
   def plus
     push(:+)
-    evaluate
+    evaluate_next
   end
 
   def minus
     push(:-)
-    evaluate
+    evaluate_next
   end
 
   def divide
     push(:/)
-    evaluate
+    evaluate_next
+  end
+
+  def tokens(input)
+    @stack = tokenize(input)
   end
 
   attr_accessor :value
 
   private
 
-  def evaluate
+  def tokenize(input)
+    input.split(' ').map do |item|
+      begin
+        Integer(item)
+      rescue ArgumentError
+        item.to_sym
+      end
+    end
+  end
+
+  def evaluate_next
     operation = @stack.pop
     second = @stack.pop
     first = @stack.pop
