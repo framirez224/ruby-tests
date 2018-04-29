@@ -78,6 +78,7 @@ describe RPNCalculator do
     calculator.push(3)
     calculator.push(4)
     calculator.divide
+    # binding.pry
     expect(calculator.value).to eq((3.0 / 4.0))
     calculator.times
     expect(calculator.value).to eq(2.0 * (3.0 / 4.0))
@@ -90,7 +91,7 @@ describe RPNCalculator do
     calculator.plus
     calculator.push(3)
     calculator.times
-    expect(calculator.value).to eq((1+2)*3)
+    expect(calculator.value).to eq((1 + 2) * 3)
 
     # 1 2 3 * + => 1 + (2 * 3)
     calculator.push(1)
@@ -98,17 +99,17 @@ describe RPNCalculator do
     calculator.push(3)
     calculator.times
     calculator.plus
-    expect(calculator.value).to eq(1+(2*3))
+    expect(calculator.value).to eq(1 + (2 * 3))
   end
 
   it "fails informatively when there's not enough values stacked away" do
-    expect { calculator.plus }.to raise_error('calculator is empty')
+    expect { calculator.plus }.to raise_error('Calculator is empty')
 
-    expect { calculator.minus }.to raise_error('calculator is empty')
+    expect { calculator.minus }.to raise_error('Calculator is empty')
 
-    expect { calculator.times }.to raise_error('calculator is empty')
+    expect { calculator.times }.to raise_error('Calculator is empty')
 
-    expect { calculator.divide }.to raise_error('calculator is empty')
+    expect { calculator.divide }.to raise_error('Calculator is empty')
   end
 
   # extra credit
